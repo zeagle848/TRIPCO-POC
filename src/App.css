@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Signika&display=swap');
 :root {
 }
 
 #root {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Signika', sans-serif;
 }
 
 body.modal-open {
@@ -20,4 +20,58 @@ body.modal-open {
 
 .date-selector-element{
   margin-right: 1rem;
+}
+
+.total-price-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 100;
+}
+
+.total-price{
+  font-size: 1.2rem;
+  padding-left: 0.5rem;
+  cursor: pointer;
+}
+
+.vat-content{
+  font-size: 0.6rem;
+  z-index: 10;
+  position: absolute;
+  color: black;
+}
+
+.tooltip {
+  background: #A4FFFF;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 5px;
+  width: fit-content;
+  border-radius: 4px;
+  font-weight: 300;
+  z-index: 10;
+  height: 0.6rem;
+  padding-bottom: 5px;
+}
+
+.tooltip.vat-tooltip{
+  width: 3rem;
+}
+
+.arrow,
+.arrow::before {
+  position: absolute;
+  width: 0.8rem;
+  height: 0.5rem;
+  background: #A4FFFF;
+  z-index: 1;
+  bottom: 0px;
+}
+
+.arrow::before {
+  visibility: visible;
+  content: '';
+  transform: rotate(45deg);
 }
