@@ -36,28 +36,64 @@ body.modal-open {
   cursor: pointer;
 }
 
-.vat-content{
+.tooltip-text{
   font-size: 0.6rem;
   z-index: 10;
   position: absolute;
   color: black;
 }
 
+.room-info-item-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.room-info-item-content{
+  padding-left: 0.5rem;
+}
+
+.gallery-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: #9AFCFC;
+  width: 800px
+}
+
 .tooltip {
   background: #A4FFFF;
   color: white;
-  padding: 4px 8px;
+  padding: 0.4rem;
   border-radius: 5px;
   width: fit-content;
   border-radius: 4px;
   font-weight: 300;
   z-index: 10;
   height: 0.6rem;
-  padding-bottom: 5px;
+  padding-bottom: 0.5rem;
 }
 
 .tooltip.vat-tooltip{
   width: 3rem;
+}
+
+.tooltip.num-of-rooms-tooltip{
+  width: 3rem;
+  height: 1.5rem
+}
+
+.tooltip.bed-types-tooltip{
+  width: 2.5rem
+}
+
+.tooltip.occupancy-tooltip{
+  width: 2.7rem;
+}
+
+.tooltip.price-per-person-per-night-tooltip{
+  width: 3rem;
+  height: 2.1rem;
 }
 
 .arrow,

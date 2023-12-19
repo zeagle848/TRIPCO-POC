@@ -42,7 +42,7 @@ export function TotalPrice(){
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             >
-                <span className='vat-content'>{vat}</span>
+                <span className='tooltip-text'>{vat}</span>
                 <div ref={setArrowElement} style={styles.arrow} className='arrow'/>
             </div>
             )}
