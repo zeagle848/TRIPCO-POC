@@ -61,6 +61,20 @@ body.modal-open {
   width: 800px
 }
 
+.email-inputs-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.email-input-item{
+  width: 20rem
+}
+
+#email-input{
+  margin-bottom: 20px;
+}
+
 .tooltip {
   background: #A4FFFF;
   color: white;
