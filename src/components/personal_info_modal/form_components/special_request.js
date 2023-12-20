@@ -1,10 +1,5 @@
-import TextField from '@mui/material/TextField';
 import { useState } from 'react';
-import styled from '@emotion/styled';
-
-const StyledTextField = styled(TextField)({
-    width: '30rem'
-});
+import { StyledTextField } from '../../styled_components/styled_text_field_modal';
 
 export function SpecialRequestInput () {
     return(

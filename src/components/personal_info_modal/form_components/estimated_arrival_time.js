@@ -1,19 +1,13 @@
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import styled from '@emotion/styled';
-
-const StyledTimePicker = styled(TimePicker)({
-    width: '9.5rem'
-});
+import { StyledTimePicker } from '../../styled_components/styled_text_field_modal';
 
 export function EstimatedArrivalTimeSelector() {
     return (
         <div>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <h3>Est. Arrival Time: </h3>
-                <StyledTimePicker />
-            </LocalizationProvider>
+            <h4 className='modal-subheader'>Est. Arrival Time: </h4>
+            <StyledTimePicker />
         </div>
     )
 } 
