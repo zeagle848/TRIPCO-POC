@@ -15,15 +15,15 @@ export function DateSelector(){
     
     return(
         <div className='date-selector-container'>
-            <div className='date-selector-element'>
+            <div className='date-selector-element' id='from-date-selector'>
                 <h5>
-                    To:
+                    From:
                 </h5>
                 <StyledDatePicker disablePast maxDate={maxDate || undefined} onChange={(newValue) => setMinDate(newValue)}/>
             </div>
             <div className='date-selector-element'>
                 <h5>
-                    From Date:
+                    To Date:
                 </h5>
                 <StyledDatePicker disablePast minDate={minDate} onChange={(newValue) => setMaxDate(newValue)}/>
             </div>

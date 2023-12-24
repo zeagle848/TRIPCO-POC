@@ -7,8 +7,8 @@ export function HeaderBar() {
         <div className='header-wrapper'>
             <h1 id='app-name'>REST ASSURED</h1>
             <div className='header-icons'>
-                <AccountCircleIcon/>
                 <NotificationsIcon/>
+                <AccountCircleIcon/>
                 <SettingsIcon/>
             </div>
         </div>
