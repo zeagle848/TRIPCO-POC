@@ -11,6 +11,26 @@ body.modal-open {
   overflow: hidden;
 }
 
+h5 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+h4 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.app-body{
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+
+
+
 /* HEADER STYLING */
 
 .header-wrapper{
@@ -43,7 +63,119 @@ body.modal-open {
   cursor: pointer;
 }
 
+
+
+
+
+
+
+/* PROPERTY CONTAINER STYLING */
+
+.property-container{
+  position: relative;
+  margin-top: 4rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  align-items: center;
+}
+
+.property-wrapper{
+  margin-top: 2rem;
+}
+
+.property-header{
+  display: flex;
+  align-items: center;
+  width: 10rem;
+  height: 3rem;
+  justify-content: space-around;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  background-color: #A4FFFF;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  margin-bottom: 0px;
+}
+
+.property-header > svg {
+  color: #239191;
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.rooms-container{
+  background-color: #E5FFFF;
+  height: 100%;
+  width: 100%;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border: dashed #A4FFFF;
+  padding: 1rem;
+  width: fit-content;
+}
+
+
+
+
+
+
 /* ROOM ITEM STYLING */
+
+.room-item-container {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-template-rows: repeat(6, auto);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+  
+.room-header { 
+  grid-area: 1 / 1 / 2 / 2;
+}
+.room-gallery { 
+  grid-area: 2 / 1 / 3 / 3; 
+  max-width: 40rem;
+}
+.room-description { 
+  grid-area: 3 / 1 / 4 / 3;
+  border-bottom: 1px solid black;
+  max-width: 40rem;
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+}
+.room-booking-header { 
+  grid-area: 4 / 1 / 5 / 2; 
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  max-width: 20rem;
+}
+
+.room-booking-selectors{
+  grid-area: 5 / 1 / 6 / 3;
+  display: flex;
+  flex-direction: row;
+}
+
+.occupancy-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 4.06rem;
+  max-width: 6rem;
+}
+
+.room-checkout-container { 
+  grid-area: 6 / 4 / 7 / 5; 
+}
+
+.room-info { 
+  grid-area: 2 / 3 / 4 / 5;
+  margin-left: 1rem;
+} 
 
 .date-selector-container{
   display: flex;
@@ -52,18 +184,20 @@ body.modal-open {
 
 .date-selector-element{
   margin-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 9rem
 }
 
 .total-price-container{
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-size: 1.2rem;
   font-weight: 100;
 }
 
 .total-price{
-  font-size: 1.2rem;
   padding-left: 0.5rem;
   cursor: pointer;
 }
@@ -83,6 +217,8 @@ body.modal-open {
 
 .room-info-item-content{
   padding-left: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .gallery-container{
@@ -90,8 +226,15 @@ body.modal-open {
   flex-wrap: wrap;
   justify-content: space-around;
   background-color: #9AFCFC;
-  width: 800px
 }
+
+
+
+
+
+
+
+
 
 /* MODAL STYLING */
 
@@ -104,6 +247,7 @@ body.modal-open {
   background-color: rgb(0, 0, 0, 0.66);
   visibility: hidden;
   position: absolute;
+  display: none;
 }
 
 .modal-root {
@@ -179,7 +323,7 @@ body.modal-open {
 /* TOOLTIP STYLING */
 
 .tooltip {
-  background: #A4FFFF;
+  background: #C8FFFF;
   color: white;
   padding: 0.4rem;
   border-radius: 5px;
@@ -204,6 +348,10 @@ body.modal-open {
   width: 2.5rem
 }
 
+.tooltip.room-type-tooltip{
+  width: 2.5rem
+}
+
 .tooltip.occupancy-tooltip{
   width: 2.7rem;
 }
@@ -218,7 +366,7 @@ body.modal-open {
   position: absolute;
   width: 0.8rem;
   height: 0.5rem;
-  background: #A4FFFF;
+  background: #C8FFFF;
   z-index: 1;
   bottom: 0px;
 }

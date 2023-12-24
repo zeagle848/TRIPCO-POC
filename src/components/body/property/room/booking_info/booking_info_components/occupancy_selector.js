@@ -1,33 +1,27 @@
 import Select from '@mui/material/Select';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import { styled } from '@mui/system';
-
-const StyledInputLabel = styled(InputLabel)({
-    fontSize: '19px', 
-    color: 'black',
-    fontWeight: 'bold',
-    marginBottom: '1rem'
-});
+import { convertIntToWord } from '../../../../../../helpers/int_to_word';
 
 const StyledSelect = styled(Select)({
-    width: '130px',
-    height: '40px'
+    width: 'index+130px',
+    height: '40px',
+    fontSize: '1rem'
   });
 
-export function OccupancySelector(){
+export function OccupancySelector({capacity}){
     return(
-        <div>
-            <StyledInputLabel className='occupancy-label'>Occupancy:</StyledInputLabel>
+        <div className='occupancy-container'>
+            <h5>Occupancy:</h5>
             <StyledSelect
             label="Occupancy"
             className='occupancy-selector'
             value={1}
             displayEmpty
             >
-                <MenuItem value={1}>One</MenuItem>
-                <MenuItem value={2}>Two</MenuItem>
-                <MenuItem value={3}>Three</MenuItem>
+                {Array(capacity).fill().map((_, index) => (
+                    <MenuItem value={index+1}>{convertIntToWord(index+1)}</MenuItem>
+                ))}
             </StyledSelect>
         </div>
     )

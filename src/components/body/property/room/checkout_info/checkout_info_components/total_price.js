@@ -22,17 +22,16 @@ export function TotalPrice(){
     const [isHovered, setIsHovered] = useState(false);
     return(
         <div>
-            <div>TEST</div>
-            <h3 className='total-price-container'>Total: 
-                <h3 
+            <h4 className='total-price-container'>Total: 
+                <h4 
                 className="total-price" 
                 ref={setReferenceElement}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 >
                     <span>{totalPrice}</span>
-                </h3>
-            </h3>
+                </h4>
+            </h4>
             {referenceElement && isHovered && (
             <div 
             ref={setPopperElement} 

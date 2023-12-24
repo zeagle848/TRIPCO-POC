@@ -8,7 +8,7 @@ const StyledMonetizationOnIcon = styled(MonetizationOnIcon)({
     cursor: 'pointer'
 });
 
-export function PricePerRoom() {
+export function PricePerRoom({price}) {
     const [referenceElement, setReferenceElement] = useState(null);
     const [popperElement, setPopperElement] = useState(null);
     const [arrowElement, setArrowElement] = useState(null);
@@ -28,14 +28,13 @@ export function PricePerRoom() {
 
     return(
         <div>
-            <h1>Test</h1>
             <div className='room-info-item-container'>
                 <StyledMonetizationOnIcon 
                 ref={setReferenceElement}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 />
-                <h3 className='room-info-item-content'>R1000</h3>
+                <h3 className='room-info-item-content'>R{price}</h3>
             </div>
             {referenceElement && isHovered && (
             <div 

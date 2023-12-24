@@ -2,13 +2,14 @@ import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import React, { useState } from 'react';
 import { usePopper } from 'react-popper';
 import styled from '@emotion/styled';
+import { convertIntToWord } from '../../../../../../helpers/int_to_word';
 
 const StyledMeetingRoomIcon = styled(MeetingRoomIcon)({
     color: '#239191',
     cursor: 'pointer'
 });
 
-export function NumberOfRooms() {
+export function NumberOfRooms({numOfRooms}) {
     const [referenceElement, setReferenceElement] = useState(null);
     const [popperElement, setPopperElement] = useState(null);
     const [arrowElement, setArrowElement] = useState(null);
@@ -28,14 +29,13 @@ export function NumberOfRooms() {
 
     return(
         <div>
-            <h1>Test</h1>
             <div className='room-info-item-container'>
                 <StyledMeetingRoomIcon 
                 ref={setReferenceElement}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 />
-                <h3 className='room-info-item-content'>Two rooms available</h3>
+                <h3 className='room-info-item-content'>{convertIntToWord(numOfRooms)} {numOfRooms===1 ? 'room' : 'rooms'} available</h3>
             </div>
             {referenceElement && isHovered && (
             <div 

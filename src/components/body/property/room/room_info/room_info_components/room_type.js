@@ -1,14 +1,14 @@
-import BedIcon from '@mui/icons-material/Bed';
+import HomeIcon from '@mui/icons-material/Home';
 import React, { useState } from 'react';
 import { usePopper } from 'react-popper';
 import styled from '@emotion/styled';
 
-const StyledBedIcon = styled(BedIcon)({
+const StyledHomeIcon = styled(HomeIcon)({
     color: '#239191',
     cursor: 'pointer'
 });
 
-export function BedTypes({bedTypes}) {
+export function RoomType({roomType}) {
     const [referenceElement, setReferenceElement] = useState(null);
     const [popperElement, setPopperElement] = useState(null);
     const [arrowElement, setArrowElement] = useState(null);
@@ -29,23 +29,23 @@ export function BedTypes({bedTypes}) {
     return(
         <div>
             <div className='room-info-item-container'>
-                <StyledBedIcon 
+                <StyledHomeIcon 
                 ref={setReferenceElement}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 />
-                <h3 className='room-info-item-content'>{bedTypes}</h3>
+                <h3 className='room-info-item-content'>{roomType}</h3>
             </div>
             {referenceElement && isHovered && (
             <div 
             ref={setPopperElement} 
             style={styles.popper} 
             {...attributes.popper} 
-            className='tooltip bed-types-tooltip'
+            className='tooltip room-type-tooltip'
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             >
-                <span className='tooltip-text'>Bed types</span>
+                <span className='tooltip-text'>Room type</span>
                 <div ref={setArrowElement} style={styles.arrow} className='arrow'/>
             </div>
             )}
