@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import { convertIntToWord } from '../../../../../../helpers/int_to_word';
 
 const StyledPeopleAltIcon = styled(PeopleAltIcon)({
-    color: '#239191',
+    color: '#6b3322',
     cursor: 'pointer'
 });
 

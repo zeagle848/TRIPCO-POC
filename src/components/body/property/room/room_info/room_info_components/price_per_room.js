@@ -4,7 +4,7 @@ import { usePopper } from 'react-popper';
 import styled from '@emotion/styled';
 
 const StyledMonetizationOnIcon = styled(MonetizationOnIcon)({
-    color: '#239191',
+    color: '#6b3322',
     cursor: 'pointer'
 });
 

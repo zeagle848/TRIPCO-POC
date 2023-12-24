@@ -23,7 +23,7 @@ export function DateSelector(){
             </div>
             <div className='date-selector-element'>
                 <h5>
-                    To Date:
+                    To:
                 </h5>
                 <StyledDatePicker disablePast minDate={minDate} onChange={(newValue) => setMaxDate(newValue)}/>
             </div>

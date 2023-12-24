@@ -40,14 +40,14 @@ h4 {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background-color: #C8FFFF;
-  border-bottom: 0.3rem solid #A4FFFF;
+  background-color: #E78251;
+  border-bottom: 0.3rem solid #9b4b32;
   height: 4rem;
 }
 
 #app-name{
   margin-left: 2rem;
-  color: #175B5B;
+  color: #6b3322;
   font-size: 40px;
 }
 
@@ -55,7 +55,7 @@ h4 {
   width: 10rem;
   display: flex;
   justify-content: space-evenly;
-  color: #239191;
+  color: #6b3322;
 }
 
 .header-icons > svg {
@@ -94,26 +94,26 @@ h4 {
   justify-content: space-around;
   padding-right: 0.5rem;
   padding-left: 0.5rem;
-  background-color: #A4FFFF;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
+  background-color: #E78251;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   margin-bottom: 0px;
 }
 
 .property-header > svg {
-  color: #239191;
+  color: #6b3322;
   transform: scale(1.1);
   cursor: pointer;
 }
 
 .rooms-container{
-  background-color: #E5FFFF;
+  background-color: white;
   height: 100%;
   width: 100%;
-  border-top-right-radius: 15px;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  border: dashed #A4FFFF;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: dashed #E78251;
   padding: 1rem;
   width: fit-content;
 }
@@ -229,7 +229,8 @@ h4 {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  background-color: #9AFCFC;
+  background-color: #E78251;
+  border-radius: 5px;
 }
 
 
@@ -327,7 +328,7 @@ h4 {
 /* TOOLTIP STYLING */
 
 .tooltip {
-  background: #C8FFFF;
+  background: #FFBB9B;
   color: white;
   padding: 0.4rem;
   border-radius: 5px;
@@ -370,7 +371,7 @@ h4 {
   position: absolute;
   width: 0.8rem;
   height: 0.5rem;
-  background: #C8FFFF;
+  background: #FFBB9B;
   z-index: 1;
   bottom: 0px;
 }

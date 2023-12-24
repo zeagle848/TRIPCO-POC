@@ -10,8 +10,10 @@ const StyledImageListItem = styled(ImageListItem)({
 const StyledImageList = styled(ImageList)({
     flexWrap: 'nowrap',
     display: 'flex',
-    paddingLeft: '20px',
-    paddingRight: '20px'
+    paddingLeft: '0.5rem',
+    paddingRight: '0.5rem',
+    marginTop: '0.5rem',
+    marginBottom: '0.5rem'
 });
 
 export function Gallery({photos}) {
