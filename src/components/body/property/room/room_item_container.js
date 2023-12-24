@@ -9,11 +9,11 @@ import { PeoplePerRoom } from "./room_info/room_info_components/people_per_room"
 import { PricePerRoom } from "./room_info/room_info_components/price_per_room"
 import { Gallery } from "./gallery"
 
-export function RoomItemContainer({room}, key) {
-    console.log(room)
+export function RoomItemContainer({room, isLastRoom}, key) {
+    console.log(isLastRoom)
     return (
-        <div className="room-item-container">
-            <div className="room-header">{room.name}</div>
+        <div className={isLastRoom ? "room-item-container last-room" : "room-item-container"}>
+            <h3 className="room-header">{room.name}</h3>
             <div className="room-gallery"><Gallery photos={room.photos}/></div>
             <div className="room-description">{room.description}</div>
             <div className="room-booking-header"><h4>Booking Info</h4></div>

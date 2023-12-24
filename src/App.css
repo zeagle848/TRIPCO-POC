@@ -16,6 +16,11 @@ h5 {
   margin-bottom: 0px;
 }
 
+h3  {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
 h4 {
   margin-top: 0px;
   margin-bottom: 0px;
@@ -41,7 +46,7 @@ h4 {
   align-items: center;
   justify-content: space-between;
   background-color: #E78251;
-  border-bottom: 0.3rem solid #9b4b32;
+  border-bottom: 0.2rem solid #9b4b32;
   height: 4rem;
 }
 
@@ -131,6 +136,13 @@ h4 {
   grid-template-rows: repeat(6, auto);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
+  border-bottom: dashed #E78251;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+.last-room{
+  border-bottom: none;
 }
   
 .room-header { 

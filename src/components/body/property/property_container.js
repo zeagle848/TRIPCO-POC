@@ -9,7 +9,7 @@ export function PropertyContainer(){
             <div className='property-wrapper'>
                 <h4 className='property-header'><ArrowBackIcon/>The Milner Hotel</h4>
                 <div className='rooms-container'>
-                    {rooms.map((room, index) => <RoomItemContainer room={room} key={index}/>)}
+                    {rooms.map((room, index) => <RoomItemContainer room={room} isLastRoom={index===rooms.length-1} key={index}/>)}
                 </div>
             </div>
         </div>
