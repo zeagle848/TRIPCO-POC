@@ -9,6 +9,7 @@ import { PeoplePerRoom } from './components/body/property/room/room_info/room_in
 import { PricePerRoom } from './components/body/property/room/room_info/room_info_components/price_per_room';
 import { Gallery } from './components/body/property/room/gallery';
 import { PersonalDetailsModal } from './components/personal_info_modal/modal_container';
+import { HeaderBar } from './components/header';
 
 export function App() {
 
@@ -17,6 +18,7 @@ export function App() {
       <div className='modal-wrapper'>
         <PersonalDetailsModal/>
       </div>
+      <HeaderBar/>
     </div>
   );
 }

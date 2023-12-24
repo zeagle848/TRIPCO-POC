@@ -11,6 +11,38 @@ body.modal-open {
   overflow: hidden;
 }
 
+/* HEADER STYLING */
+
+.header-wrapper{
+  position: absolute;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #C8FFFF;
+  border-bottom: 0.3rem solid #A4FFFF;
+  height: 4rem;
+}
+
+#app-name{
+  margin-left: 2rem;
+  color: #175B5B;
+  font-size: 40px;
+}
+
+.header-icons{
+  width: 10rem;
+  display: flex;
+  justify-content: space-evenly;
+  color: #239191;
+}
+
+.header-icons > svg {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
 /* ROOM ITEM STYLING */
 
 .date-selector-container{
@@ -71,6 +103,7 @@ body.modal-open {
   min-height: 100vh;
   background-color: rgb(0, 0, 0, 0.66);
   visibility: hidden;
+  position: absolute;
 }
 
 .modal-root {
