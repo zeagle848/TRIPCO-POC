@@ -10,7 +10,7 @@ const StyledSelect = styled(Select)({
     fontSize: '1rem'
   });
 
-export function OccupancySelector({capacity}){
+export function OccupancySelector({getSpecificBookingInfo, capacity, handleBookingInfoAddition, handleFinancialChange, roomId}){
     const [selectedOccupancy, setSelectedOccupancy] = useState(1)
     return(
         <div className='occupancy-container'>
@@ -20,7 +20,11 @@ export function OccupancySelector({capacity}){
             className='occupancy-selector'
             value={selectedOccupancy}
             displayEmpty
-            onChange={(newValue) => setSelectedOccupancy(newValue.target.value)}
+            onChange={(event) => {
+                setSelectedOccupancy(event.target.value)
+                handleBookingInfoAddition({bookingParameter: 'occupancy_per_night', value: event.target.value, roomId})
+                handleFinancialChange(getSpecificBookingInfo(roomId))
+                }}
             >
                 {Array(capacity).fill().map((_, index) => (
                     <MenuItem key={index+1}value={index+1}>

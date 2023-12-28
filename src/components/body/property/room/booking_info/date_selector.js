@@ -9,10 +9,9 @@ const StyledDatePicker = styled(DatePicker)({
     right: '1.65rem'
 });
 
-export function DateSelector({setNumberOfNights}){
-    const [startDate, setStartDate] = useState(dayjs());
+export function DateSelector({handleDateRangeSelection, handleBookingInfoAddition, roomId}){
+    const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
-    const [differenceInDays, setDifferenceInDays] = useState(null);
 
     const onChangeHandlerStartSelector = (newValue) => {
       setStartDate(newValue);
@@ -21,36 +20,44 @@ export function DateSelector({setNumberOfNights}){
     const onChangeHandlerEndSelector = (newValue) => {
       setEndDate(newValue);
     };
-  
+
     useEffect(() => {
-    const setNewNumberOfNights = () => {
-      if (endDate && startDate) {
-        const endDateDateFormatted = dayjs(endDate).startOf('day');
-        const startDateFormatted = dayjs(startDate).startOf('day');
-        const diffInDays = endDateDateFormatted.diff(startDateFormatted, 'day');
-        setDifferenceInDays(diffInDays);
-      }
-    };
-    setNewNumberOfNights();
-  }, [endDate, startDate]);
+        if (endDate && startDate) {
+            const endDateDateFormatted = dayjs(endDate).startOf('day');
+            const startDateFormatted = dayjs(startDate).startOf('day');
+            const diffInDays = endDateDateFormatted.diff(startDateFormatted, 'day');
+            handleBookingInfoAddition({bookingParameter: 'total_number_of_nights', value: diffInDays, roomId: roomId})
+        }
+    }, [endDate, startDate]);
   
-    useEffect(() => {
-      console.log(differenceInDays);
-    }, [differenceInDays]);
-    
     return(
         <div className='date-selector-container'>
             <div className='date-selector-element' id='from-date-selector'>
                 <h5>
                     From:
                 </h5>
-                <StyledDatePicker disablePast value={startDate || undefined} onChange={onChangeHandlerStartSelector}/>
+                <StyledDatePicker 
+                disablePast 
+                value={startDate} 
+                onChange = {(value)=>{
+                    onChangeHandlerStartSelector(value)
+                    handleDateRangeSelection({bookingParameter: 'start_date', value: value})
+                }
+                } 
+                maxDate={endDate || undefined}/>
             </div>
             <div className='date-selector-element'>
                 <h5>
                     To:
                 </h5>
-                <StyledDatePicker disablePast value={endDate} onChange={onChangeHandlerEndSelector}/>
+                <StyledDatePicker 
+                disablePast
+                minDate={startDate !== endDate ? startDate : ''} 
+                onChange= {(value) =>{
+                    onChangeHandlerEndSelector(value)
+                    handleDateRangeSelection({bookingParameter: 'end_date', value: value})
+                }
+                }/>
             </div>
         </div>
     )

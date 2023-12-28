@@ -25,7 +25,7 @@ export function PersonalDetailsModal({ closeModal, bookingInformation }) {
     }));
   }, []);
     
-    const isFormValid = Object.values(personalDetails).every((value) => value !== "");
+  const isFormValid = Object.values(personalDetails).every((value) => value !== "");
 
   return (
     <div className="modal-root">
