@@ -32,10 +32,6 @@ h4 {
 }
 
 
-
-
-
-
 /* HEADER STYLING */
 
 .header-wrapper{
@@ -262,8 +258,20 @@ h4 {
   text-align: center;
   min-height: 100vh;
   background-color: rgb(0, 0, 0, 0.66);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100; 
+}
+
+.modal-wrapper.hidden{
   visibility: hidden;
-  position: absolute;
   display: none;
 }
 
@@ -274,11 +282,22 @@ h4 {
   grid-column-gap: 1rem;
   grid-row-gap: 1rem;
   /* background-color: #175B5B; */
-  background-color: rgb(23, 91, 91, 0.66);
+  background-color: white;
   width: 30rem;
   height: 41rem;
   border-radius: 0.5rem;
-  border: solid black;
+  border: 2px solid black;
+}
+
+.close-modal-button{
+  background-color: rgb(215, 56, 56);
+  height: 1.4rem;
+  width: 1.2rem;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  cursor: pointer;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
 }
 
 .modal-element{
@@ -296,7 +315,7 @@ h4 {
 
 #modal-header-container { 
   grid-area: 1 / 2 / 2 / 5;
-  color: white;
+  color: black;
 }
 
 #first-name-container { 
@@ -313,6 +332,7 @@ h4 {
 
 #phone-number-container { 
   grid-area: 6 / 2 / 7 / 4;
+  z-index: 99;
 }
 
 #eta-container { 

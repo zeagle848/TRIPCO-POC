@@ -17,13 +17,16 @@ const theme = createTheme({
         dark: '#E78251'
       },
     },
-  });
+});
 
-export function BookButton() {
+export function BookButton({openModal}) {
+    const handleBookNowButtonClick = () => {
+        openModal();
+    }
     return(
         <div>
             <ThemeProvider theme={theme}>
-                <StyledButton variant="contained" color="rustRed">BOOK NOW</StyledButton>
+                <StyledButton variant="contained" color="rustRed" onClick={handleBookNowButtonClick}>BOOK NOW</StyledButton>
             </ThemeProvider>
         </div>
     )

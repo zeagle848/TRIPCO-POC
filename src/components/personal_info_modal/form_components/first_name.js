@@ -1,14 +1,18 @@
-import TextField from '@mui/material/TextField';
+import { StyledTextField } from '../../component_styles/text_field_modal_styles';
 import { useState } from 'react';
-import styled from '@emotion/styled';
-import { StyledTextField } from '../../styled_components/styled_text_field_modal';
 
-export function FirstNameInput () {
+export function FirstNameInput ({onChange}) {
+    const [firstName, setFirstName] = useState('')
     return(
         <StyledTextField 
             variant='standard' 
             label='First Name' 
-            fullWidth 
+            onChange={(event) => {
+                onChange(event.target.value)
+                setFirstName(event.target.value)
+            }}
+            value={firstName}
+            fullWidth
         />
     )
 }

@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { StyledTextField } from '../../styled_components/styled_text_field_modal';
+import { StyledTextField } from '../../component_styles/text_field_modal_styles';
 
-export function SpecialRequestInput () {
+export function SpecialRequestInput ({onChange}) {
+    const [specialRequest, setSpecialRequest] = useState('')
     return(
         <StyledTextField 
             label="Special Request"
@@ -9,6 +10,11 @@ export function SpecialRequestInput () {
             fullWidth
             rows={4}
             variant='standard'
+            value={specialRequest}
+            onChange={(event) => {
+                setSpecialRequest(event.target.value)
+                onChange(event.target.value)
+            }}
         />
     )
 }

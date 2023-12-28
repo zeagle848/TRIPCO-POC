@@ -1,9 +1,7 @@
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
-import styled from '@emotion/styled';
-import { StyledEmailTextField } from '../../styled_components/styled_text_field_modal';
 
-export function EmailInput() {
+export function EmailInput({onEmailChange, onConfirmEmailChange}) {
     const [email, setEmail] = useState('')
     const [confirmEmail, setConfirmEmail] = useState('')
     const [emailError, setEmailError] = useState(false)
@@ -19,19 +17,23 @@ export function EmailInput() {
     }
     return(
         <div className='email-inputs-container'>
-            <StyledEmailTextField 
+            <TextField 
             variant='standard' 
             label='Email' 
             fullWidth 
-            value={email} 
-            onChange={handleEmailChange}
+            onChange={(event) => {
+                handleEmailChange(event)
+                onEmailChange(event.target.value)
+            }}
             />
-            <StyledEmailTextField 
+            <TextField 
             variant='standard' 
             label='Confirm Email' 
             id='confirm-email-input' 
-            value={confirmEmail} 
-            onChange={handleConfirmEmailChange} 
+            onChange={(event) => {
+                handleConfirmEmailChange(event)
+                onConfirmEmailChange(event.target.value)
+            }} 
             fullWidth 
             error={emailError} 
             helperText={emailError ? 'Emails must match.' : ''}

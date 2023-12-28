@@ -1,16 +1,16 @@
-import { DateSelector } from "./booking_info/booking_info_components/date_selector"
-import { OccupancySelector } from "./booking_info/booking_info_components/occupancy_selector"
-import { TotalPrice } from "./checkout_info/checkout_info_components/total_price"
-import { BookButton } from "./checkout_info/checkout_info_components/book_button"
-import { RoomType } from "./room_info/room_info_components/room_type"
-import { BedTypes } from "./room_info/room_info_components/bed_types"
-import { NumberOfRooms } from "./room_info/room_info_components/number_of_rooms"
-import { PeoplePerRoom } from "./room_info/room_info_components/people_per_room"
-import { PricePerRoom } from "./room_info/room_info_components/price_per_room"
-import { Gallery } from "./gallery"
+import { DateSelector } from "./booking_info/date_selector"
+import { OccupancySelector } from "./booking_info/occupancy_selector"
+import { TotalPrice } from "./checkout_info_components/total_price"
+import { BookButton } from "./checkout_info_components/book_button"
+import { RoomType } from "./room_info_components/room_type"
+import { BedTypes } from "./room_info_components/bed_types"
+import { NumberOfRooms } from "./room_info_components/number_of_rooms"
+import { PeoplePerRoom } from "./room_info_components/people_per_room"
+import { PricePerRoom } from "./room_info_components/price_per_room"
+import { Gallery } from "./room_info_components/gallery"
 
-export function RoomItemContainer({room, isLastRoom}, key) {
-    console.log(isLastRoom)
+export function RoomItemContainer({room, isLastRoom, openModal}, key) {
+
     return (
         <div className={isLastRoom ? "room-item-container last-room" : "room-item-container"}>
             <h3 className="room-header">{room.name}</h3>
@@ -19,10 +19,10 @@ export function RoomItemContainer({room, isLastRoom}, key) {
             <div className="room-booking-header"><h4>Booking Info</h4></div>
             <div className="room-booking-selectors">
                 <div className="room-date-selector"><DateSelector/></div>
-                <div className="room-occupancy-selector"><OccupancySelector capacity={room.capacity_per_room}/></div>
+                <div className="room-occupancy-selector"><OccupancySelector/></div>
             </div>
             <div className="room-checkout-container">
-                <BookButton/>
+                <BookButton openModal={openModal}/>
                 <TotalPrice/>
             </div>
             <div className="room-info">

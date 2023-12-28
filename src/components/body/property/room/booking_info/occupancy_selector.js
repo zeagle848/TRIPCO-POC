@@ -1,7 +1,7 @@
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { styled } from '@mui/system';
-import { convertIntToWord } from '../../../../../../helpers/int_to_word';
+import { convertIntToWord } from '../../../../../utils/utils';
 import { useState } from 'react';
 
 const StyledSelect = styled(Select)({
@@ -23,7 +23,9 @@ export function OccupancySelector({capacity}){
             onChange={(newValue) => setSelectedOccupancy(newValue.target.value)}
             >
                 {Array(capacity).fill().map((_, index) => (
-                    <MenuItem value={index+1}>{convertIntToWord(index+1)}</MenuItem>
+                    <MenuItem key={index+1}value={index+1}>
+                        {convertIntToWord(index+1)}
+                    </MenuItem>
                 ))}
             </StyledSelect>
         </div>

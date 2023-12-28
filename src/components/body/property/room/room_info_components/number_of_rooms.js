@@ -1,9 +1,15 @@
+import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import React, { useState } from 'react';
 import { usePopper } from 'react-popper';
+import styled from '@emotion/styled';
+import { convertIntToWord } from '../../../../../utils/utils';
 
-export function TotalPrice(){
-    const totalPrice = 'R17250'
-    const vat = 'VAT: R2250'
+const StyledMeetingRoomIcon = styled(MeetingRoomIcon)({
+    color: '#6b3322',
+    cursor: 'pointer'
+});
+
+export function NumberOfRooms({numOfRooms}) {
     const [referenceElement, setReferenceElement] = useState(null);
     const [popperElement, setPopperElement] = useState(null);
     const [arrowElement, setArrowElement] = useState(null);
@@ -15,33 +21,32 @@ export function TotalPrice(){
     const handleMouseEnter = () => {
         setIsHovered(true);
     };
-
     const handleMouseLeave = () => {
         setIsHovered(false);
     };
     const [isHovered, setIsHovered] = useState(false);
+
+
     return(
         <div>
-            <h4 className='total-price-container'>Total: 
-                <h4 
-                className="total-price" 
+            <div className='room-info-item-container'>
+                <StyledMeetingRoomIcon 
                 ref={setReferenceElement}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
-                >
-                    <span>{totalPrice}</span>
-                </h4>
-            </h4>
+                />
+                <h3 className='room-info-item-content'>{convertIntToWord(numOfRooms)} {numOfRooms===1 ? 'room' : 'rooms'} available</h3>
+            </div>
             {referenceElement && isHovered && (
             <div 
             ref={setPopperElement} 
             style={styles.popper} 
             {...attributes.popper} 
-            className='tooltip vat-tooltip'
+            className='tooltip num-of-rooms-tooltip'
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             >
-                <span className='tooltip-text'>{vat}</span>
+                <span className='tooltip-text'>Number of rooms</span>
                 <div ref={setArrowElement} style={styles.arrow} className='arrow'/>
             </div>
             )}

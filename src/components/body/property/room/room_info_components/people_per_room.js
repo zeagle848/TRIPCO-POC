@@ -2,7 +2,7 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import React, { useState } from 'react';
 import { usePopper } from 'react-popper';
 import styled from '@emotion/styled';
-import { convertIntToWord } from '../../../../../../helpers/int_to_word';
+import { convertIntToWord } from '../../../../../utils/utils';
 
 const StyledPeopleAltIcon = styled(PeopleAltIcon)({
     color: '#6b3322',
