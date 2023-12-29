@@ -12,8 +12,8 @@ const StyledSelect = styled(Select)({
 
 export function OccupancySelector({
     capacity, 
-    getSpecificBookingInfoAtttribute, 
-    handleOccupancyChange, 
+    setCurrentRoomAttribute, 
+    getCurrentRoomAttribute, 
     handleFinancialChange
 }){
     const [selectedOccupancy, setSelectedOccupancy] = useState(1)
@@ -31,7 +31,7 @@ export function OccupancySelector({
                 handleFinancialChange({
                     value: event.target.value
                 })
-                handleOccupancyChange(event.target.value)
+                setCurrentRoomAttribute({attributeToChange: 'occupancy_per_night', value: event.target.value})
             }}
             >
                 {Array(capacity).fill().map((_, index) => (

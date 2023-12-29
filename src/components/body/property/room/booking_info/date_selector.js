@@ -9,18 +9,18 @@ const StyledDatePicker = styled(DatePicker)({
     right: '1.65rem'
 });
 
-export function DateSelector({handleFinancialChange, handleDateRangeSelection, getSpecificBookingInfoAtttribute, handleSingleAttributeAdditionAllRooms, roomId}){
+export function DateSelector({handleFinancialChange, setCurrentRoomAttribute, getCurrentRoomAttribute}){
     const [startDate, setStartDate] = useState(dayjs());
     const [endDate, setEndDate] = useState(null);
-    
+
     const onChangeHandlerStartSelector = (newValue) => {
         setStartDate(newValue);
-        handleSingleAttributeAdditionAllRooms({bookingParameter: 'start_date', value: newValue, roomId: roomId})
+        setCurrentRoomAttribute({attributeToChange: 'start_date', value: newValue})
     };
-    
+
     const onChangeHandlerEndSelector = (newValue) => {
         setEndDate(newValue);
-        handleSingleAttributeAdditionAllRooms({bookingParameter: 'end_date', value: newValue, roomId: roomId})
+        setCurrentRoomAttribute({attributeToChange: 'end_date', value: newValue})
     };
 
     const handleDateChange = useCallback((startDate, endDate) => {
@@ -28,18 +28,11 @@ export function DateSelector({handleFinancialChange, handleDateRangeSelection, g
             const endDateDateFormatted = dayjs(endDate).startOf('day');
             const startDateFormatted = dayjs(startDate).startOf('day');
             const diffInDays = endDateDateFormatted.diff(startDateFormatted, 'day');
-            handleSingleAttributeAdditionAllRooms({bookingParameter: 'number_of_nights', value: diffInDays, roomId: roomId})
-            handleFinancialChange({numberOfNights: diffInDays, occupancyPerNight: getSpecificBookingInfoAtttribute('occupancy_per_night', roomId)})
+            setCurrentRoomAttribute({attributeToChange: 'number_of_nights', value: diffInDays})
+            handleFinancialChange({numberOfNights: diffInDays, occupancyPerNight: getCurrentRoomAttribute('occupancy_per_night')})
         }
-    }, [startDate, endDate])
+    }, [startDate, endDate, setCurrentRoomAttribute, handleFinancialChange])
 
-    useEffect(() => {
-        handleDateChange(startDate, endDate); 
-    }, [startDate, endDate]);
-
-    useEffect(() => {
-    }, [endDate, startDate]);
-    
   
     return(
         <div className='date-selector-container'>
@@ -52,7 +45,7 @@ export function DateSelector({handleFinancialChange, handleDateRangeSelection, g
                 value={startDate} 
                 onChange = {(value)=>{
                     onChangeHandlerStartSelector(value)
-                    handleDateRangeSelection({bookingParameter: 'start_date', value: value})
+                    handleDateChange(getCurrentRoomAttribute('start_date'), getCurrentRoomAttribute('end_date'))
                 }
                 } 
                 maxDate={endDate || undefined}/>
@@ -66,7 +59,7 @@ export function DateSelector({handleFinancialChange, handleDateRangeSelection, g
                 minDate={startDate !== endDate ? startDate : ''} 
                 onChange= {(value) =>{
                     onChangeHandlerEndSelector(value)
-                    handleDateRangeSelection({bookingParameter: 'end_date', value: value})
+                    handleDateChange(getCurrentRoomAttribute('start_date'), getCurrentRoomAttribute('end_date'))
                 }
                 }/>
             </div>

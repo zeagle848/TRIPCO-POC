@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { usePopper } from 'react-popper';
 
-export function TotalPrice({getCurrentFinancialInfo, roomId}){
+export function TotalPrice({getFinancialInfo}){
     const [referenceElement, setReferenceElement] = useState(null);
     const [popperElement, setPopperElement] = useState(null);
     const [arrowElement, setArrowElement] = useState(null);
@@ -10,29 +10,21 @@ export function TotalPrice({getCurrentFinancialInfo, roomId}){
         modifiers: [{ name: 'arrow', options: { element: arrowElement } }]
     });
 
-    
-    const currentFinancialInfo = getCurrentFinancialInfo()
-    // if(roomId === 1){
-    //     console.log(currentFinancialInfo)
-    // }
-    const [vat, setVat] = useState('');
-    const [priceAfterVat, setPriceAfterVat] = useState('');
-
-    useEffect(() => {
-        const { vat, priceAfterVat } = getCurrentFinancialInfo();
-        setVat(vat);
-        setPriceAfterVat(priceAfterVat);
-    }, [currentFinancialInfo]);
-
     const [isHovered, setIsHovered] = useState(false);
 
     const handleMouseEnter = () => {
         setIsHovered(true);
     };
-
+    
     const handleMouseLeave = () => {
         setIsHovered(false);
     };
+    
+    const currentFinancialInfo = getFinancialInfo()
+    const [vat, setVat] = useState(currentFinancialInfo.vat);
+    const [priceAfterVat, setPriceAfterVat] = useState(currentFinancialInfo.price_after_vat);
+    
+
     return(
         <div>
             { priceAfterVat > 0 && 

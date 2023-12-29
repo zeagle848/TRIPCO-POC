@@ -2,7 +2,6 @@ import Button from '@mui/material/Button';
 import styled from '@emotion/styled';
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@emotion/react';
-import { useEffect } from 'react';
 
 const StyledButton = styled(Button)({
     height: '2rem',
@@ -22,7 +21,7 @@ const theme = createTheme({
 
 export function BookButton({openModal, isButtonDisabled, getCurrentRoom}) {
     const handleBookNowButtonClick = () => {
-        openModal(getCurrentRoom);
+        openModal(getCurrentRoom());
     }
     return(
         <div>

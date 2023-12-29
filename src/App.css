@@ -70,6 +70,23 @@ h4 {
 
 
 
+/* FOOTER STYLNG */
+
+.footer-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 1rem;
+}
+.footer-container  a {
+  color: inherit;
+}
+
+
+
+
+
 /* PROPERTY CONTAINER STYLING */
 
 .property-container{
