@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { usePopper } from 'react-popper';
 
-export function TotalPrice(){
-    const totalPrice = 'R17250'
-    const vat = 'VAT: R2250'
+export function TotalPrice({getCurrentFinancialInfo, roomId}){
     const [referenceElement, setReferenceElement] = useState(null);
     const [popperElement, setPopperElement] = useState(null);
     const [arrowElement, setArrowElement] = useState(null);
@@ -12,6 +10,22 @@ export function TotalPrice(){
         modifiers: [{ name: 'arrow', options: { element: arrowElement } }]
     });
 
+    
+    const currentFinancialInfo = getCurrentFinancialInfo()
+    // if(roomId === 1){
+    //     console.log(currentFinancialInfo)
+    // }
+    const [vat, setVat] = useState('');
+    const [priceAfterVat, setPriceAfterVat] = useState('');
+
+    useEffect(() => {
+        const { vat, priceAfterVat } = getCurrentFinancialInfo();
+        setVat(vat);
+        setPriceAfterVat(priceAfterVat);
+    }, [currentFinancialInfo]);
+
+    const [isHovered, setIsHovered] = useState(false);
+
     const handleMouseEnter = () => {
         setIsHovered(true);
     };
@@ -19,9 +33,9 @@ export function TotalPrice(){
     const handleMouseLeave = () => {
         setIsHovered(false);
     };
-    const [isHovered, setIsHovered] = useState(false);
     return(
         <div>
+            { priceAfterVat > 0 && 
             <div className='total-price-container'>Total: 
                 <h4 
                 className="total-price" 
@@ -29,9 +43,9 @@ export function TotalPrice(){
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 >
-                    <span>{totalPrice}</span>
+                   <span>{`R${priceAfterVat}`}</span>
                 </h4>
-            </div>
+            </div>}
             {referenceElement && isHovered && (
             <div 
             ref={setPopperElement} 
@@ -41,7 +55,7 @@ export function TotalPrice(){
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             >
-                <span className='tooltip-text'>{vat}</span>
+                <span className='tooltip-text'>{`R${vat}`}</span>
                 <div ref={setArrowElement} style={styles.arrow} className='arrow'/>
             </div>
             )}

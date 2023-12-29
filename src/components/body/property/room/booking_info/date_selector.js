@@ -1,5 +1,5 @@
 import { DatePicker } from '@mui/x-date-pickers';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import dayjs from 'dayjs';
 import styled from '@emotion/styled';
 
@@ -9,26 +9,37 @@ const StyledDatePicker = styled(DatePicker)({
     right: '1.65rem'
 });
 
-export function DateSelector({handleDateRangeSelection, handleBookingInfoAddition, roomId}){
-    const [startDate, setStartDate] = useState(null);
+export function DateSelector({handleFinancialChange, handleDateRangeSelection, getSpecificBookingInfoAtttribute, handleSingleAttributeAdditionAllRooms, roomId}){
+    const [startDate, setStartDate] = useState(dayjs());
     const [endDate, setEndDate] = useState(null);
-
+    
     const onChangeHandlerStartSelector = (newValue) => {
-      setStartDate(newValue);
+        setStartDate(newValue);
+        handleSingleAttributeAdditionAllRooms({bookingParameter: 'start_date', value: newValue, roomId: roomId})
     };
-  
+    
     const onChangeHandlerEndSelector = (newValue) => {
-      setEndDate(newValue);
+        setEndDate(newValue);
+        handleSingleAttributeAdditionAllRooms({bookingParameter: 'end_date', value: newValue, roomId: roomId})
     };
 
-    useEffect(() => {
+    const handleDateChange = useCallback((startDate, endDate) => {
         if (endDate && startDate) {
             const endDateDateFormatted = dayjs(endDate).startOf('day');
             const startDateFormatted = dayjs(startDate).startOf('day');
             const diffInDays = endDateDateFormatted.diff(startDateFormatted, 'day');
-            handleBookingInfoAddition({bookingParameter: 'total_number_of_nights', value: diffInDays, roomId: roomId})
+            handleSingleAttributeAdditionAllRooms({bookingParameter: 'number_of_nights', value: diffInDays, roomId: roomId})
+            handleFinancialChange({numberOfNights: diffInDays, occupancyPerNight: getSpecificBookingInfoAtttribute('occupancy_per_night', roomId)})
         }
+    }, [startDate, endDate])
+
+    useEffect(() => {
+        handleDateChange(startDate, endDate); 
+    }, [startDate, endDate]);
+
+    useEffect(() => {
     }, [endDate, startDate]);
+    
   
     return(
         <div className='date-selector-container'>

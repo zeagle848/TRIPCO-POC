@@ -2,7 +2,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { styled } from '@mui/system';
 import { convertIntToWord } from '../../../../../utils/utils';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 const StyledSelect = styled(Select)({
     width: 'index+130px',
@@ -10,8 +10,14 @@ const StyledSelect = styled(Select)({
     fontSize: '1rem'
   });
 
-export function OccupancySelector({getSpecificBookingInfo, capacity, handleBookingInfoAddition, handleFinancialChange, roomId}){
+export function OccupancySelector({
+    capacity, 
+    getSpecificBookingInfoAtttribute, 
+    handleOccupancyChange, 
+    handleFinancialChange
+}){
     const [selectedOccupancy, setSelectedOccupancy] = useState(1)
+
     return(
         <div className='occupancy-container'>
             <h5>Occupancy:</h5>
@@ -22,9 +28,11 @@ export function OccupancySelector({getSpecificBookingInfo, capacity, handleBooki
             displayEmpty
             onChange={(event) => {
                 setSelectedOccupancy(event.target.value)
-                handleBookingInfoAddition({bookingParameter: 'occupancy_per_night', value: event.target.value, roomId})
-                handleFinancialChange(getSpecificBookingInfo(roomId))
-                }}
+                handleFinancialChange({
+                    value: event.target.value
+                })
+                handleOccupancyChange(event.target.value)
+            }}
             >
                 {Array(capacity).fill().map((_, index) => (
                     <MenuItem key={index+1}value={index+1}>

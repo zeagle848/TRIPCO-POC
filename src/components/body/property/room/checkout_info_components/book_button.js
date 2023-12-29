@@ -2,6 +2,7 @@ import Button from '@mui/material/Button';
 import styled from '@emotion/styled';
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@emotion/react';
+import { useEffect } from 'react';
 
 const StyledButton = styled(Button)({
     height: '2rem',
@@ -19,14 +20,14 @@ const theme = createTheme({
     },
 });
 
-export function BookButton({openModal}) {
+export function BookButton({openModal, isButtonDisabled, getCurrentRoom}) {
     const handleBookNowButtonClick = () => {
-        openModal();
+        openModal(getCurrentRoom);
     }
     return(
         <div>
             <ThemeProvider theme={theme}>
-                <StyledButton variant="contained" color="rustRed" onClick={handleBookNowButtonClick}>BOOK NOW</StyledButton>
+                <StyledButton disabled={isButtonDisabled()} variant="contained" color="rustRed" onClick={handleBookNowButtonClick}>BOOK NOW</StyledButton>
             </ThemeProvider>
         </div>
     )
