@@ -2,7 +2,7 @@ import { RoomItemContainer } from './room/room_item_container';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { DATA_FROM_TRIPCO } from '../../../data';
 
-export function PropertyContainer({openModal, handleUpdateAllRooms , getAllRooms, getSpecificRoom}){
+export function PropertyContainer({openModal, getSpecificRoom}){
   const rooms = DATA_FROM_TRIPCO.rooms
   
   return (
@@ -12,9 +12,7 @@ export function PropertyContainer({openModal, handleUpdateAllRooms , getAllRooms
               <div className='rooms-container'> 
                   {rooms.map((room, index) =>  
                     <RoomItemContainer 
-                    getAllRooms = {getAllRooms}
                     getSpecificRoom = {getSpecificRoom}
-                    handleUpdateAllRooms = {handleUpdateAllRooms} 
                     room={room} 
                     isLastRoom={index===rooms.length-1} 
                     roomId={index + 1}

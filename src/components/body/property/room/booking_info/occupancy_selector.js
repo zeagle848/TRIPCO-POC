@@ -13,7 +13,6 @@ const StyledSelect = styled(Select)({
 export function OccupancySelector({
     capacity, 
     setCurrentRoomAttribute, 
-    getCurrentRoomAttribute, 
     handleFinancialChange
 }){
     const [selectedOccupancy, setSelectedOccupancy] = useState(1)
@@ -27,18 +26,16 @@ export function OccupancySelector({
             value={selectedOccupancy}
             displayEmpty
             onChange={(event) => {
-                setSelectedOccupancy(event.target.value)
-                handleFinancialChange({
-                    value: event.target.value
-                })
                 setCurrentRoomAttribute({attributeToChange: 'occupancy_per_night', value: event.target.value})
+                setSelectedOccupancy(event.target.value)
+                handleFinancialChange(event.target.value)
             }}
             >
-                {Array(capacity).fill().map((_, index) => (
-                    <MenuItem key={index+1}value={index+1}>
-                        {convertIntToWord(index+1)}
-                    </MenuItem>
-                ))}
+            {Array(capacity).fill().map((_, index) => (
+                <MenuItem key={index+1}value={index+1}>
+                    {convertIntToWord(index+1)}
+                </MenuItem>
+            ))}
             </StyledSelect>
         </div>
     )

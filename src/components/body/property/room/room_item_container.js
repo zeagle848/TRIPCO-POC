@@ -10,9 +10,13 @@ import { PricePerRoom } from "./room_info_components/price_per_room"
 import { Gallery } from "./room_info_components/gallery"
 import { useState, useCallback, useEffect } from "react"
 
-export function RoomItemContainer({getAllRooms, getSpecificRoom, handleUpdateAllRooms, room, isLastRoom, roomId, openModal}, key) {
+export function RoomItemContainer({getSpecificRoom, room, isLastRoom, roomId, openModal}, key) {
 
     const [currentRoom, setCurrentRoom] = useState(getSpecificRoom(roomId))
+
+    useEffect(() => {
+        console.log(currentRoom)
+    }, [currentRoom])
 
     const getCurrentRoom = useCallback(() => {
         return currentRoom;
@@ -25,8 +29,10 @@ export function RoomItemContainer({getAllRooms, getSpecificRoom, handleUpdateAll
     }, [])
     
     const getCurrentRoomAttribute = useCallback((attribute) => {
+        const currentRoom = getCurrentRoom();
+        console.log(attribute)
         let value = currentRoom[attribute];
-        if(!value){
+        if(!value || currentRoom.financial_info[attribute]){
             value = currentRoom.financial_info[attribute]
         }
         return value || undefined
@@ -35,20 +41,19 @@ export function RoomItemContainer({getAllRooms, getSpecificRoom, handleUpdateAll
     
     const handleFinancialChange = useCallback(({numberOfNights, occupancyPerNight}) => {
         const pricePerPerson = getCurrentRoomAttribute('price_per_person_per_night')
-        const occupancePerNight = occupancyPerNight
-        const priceBeforeVat = pricePerPerson * numberOfNights * occupancePerNight
+        const priceBeforeVat = pricePerPerson * numberOfNights * occupancyPerNight
         const vat = priceBeforeVat * 0.15
         const price_after_vat = priceBeforeVat + vat;
+
         const newFinancialObject = {
             ...getCurrentRoomAttribute('financial_info'), 
             price_before_vat: priceBeforeVat, 
             vat: vat, 
             price_after_vat: price_after_vat, 
-            can_show_button: priceBeforeVat < 0 && numberOfNights < 0, 
+            can_enable_button: priceBeforeVat < 0 && numberOfNights < 0, 
             price_per_person: pricePerPerson
         }
-        
-        setCurrentRoomAttribute({attributeToChange: 'financial_info', newFinancialObject})
+        setCurrentRoomAttribute({attributeToChange: 'financial_info', value: newFinancialObject})
     }, [currentRoom])
 
     const getFinancialInfo = useCallback(() => {
