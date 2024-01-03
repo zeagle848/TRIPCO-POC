@@ -11,60 +11,68 @@ import { Gallery } from "./room_info_components/gallery"
 import { useState, useCallback, useEffect } from "react"
 
 export function RoomItemContainer({getSpecificRoom, room, isLastRoom, roomId, openModal}, key) {
-
     const [currentRoom, setCurrentRoom] = useState(getSpecificRoom(roomId))
-
-    useEffect(() => {
-        console.log(currentRoom)
-    }, [currentRoom])
-
-    const getCurrentRoom = useCallback(() => {
-        return currentRoom;
-    }, [currentRoom])
 
     const setCurrentRoomAttribute = useCallback(({attributeToChange, value}) => {
         setCurrentRoom((prevState) => {
             return {...prevState, [attributeToChange]: value}
         })
     }, [])
-    
+
+    const getCurrentRoom = useCallback(() => {
+        return currentRoom;
+    }, [currentRoom])
+
     const getCurrentRoomAttribute = useCallback((attribute) => {
         const currentRoom = getCurrentRoom();
-        console.log(attribute)
         let value = currentRoom[attribute];
-        if(!value || currentRoom.financial_info[attribute]){
-            value = currentRoom.financial_info[attribute]
-        }
-        return value || undefined
-    }, [currentRoom])
-    
-    
-    const handleFinancialChange = useCallback(({numberOfNights, occupancyPerNight}) => {
-        const pricePerPerson = getCurrentRoomAttribute('price_per_person_per_night')
-        const priceBeforeVat = pricePerPerson * numberOfNights * occupancyPerNight
-        const vat = priceBeforeVat * 0.15
-        const price_after_vat = priceBeforeVat + vat;
+        return value;
+    }, [getCurrentRoom])
 
+    const [numberOfNights, setNumberOfNights] = useState()
+    const [occupancy, setOccupancy] = useState(1)
+
+    const getNumberOfNights = useCallback(() => {
+        return numberOfNights;
+    }, [numberOfNights])
+
+    const getOccupancy = useCallback(() => {
+        return occupancy;
+    }, [occupancy])
+
+    const setFinancialInformation = useCallback(() => {
+        const occupancy = getOccupancy();
+        const numberOfNights = getNumberOfNights();
+
+        if(!numberOfNights){
+            return;
+        }
+
+        const pricePerPerson = getCurrentRoomAttribute('price_per_person_per_night')
+        const priceBeforeVat = pricePerPerson * numberOfNights * occupancy
+        const vat = priceBeforeVat * 0.15
+        const priceAfterVat = priceBeforeVat + vat;
         const newFinancialObject = {
-            ...getCurrentRoomAttribute('financial_info'), 
             price_before_vat: priceBeforeVat, 
             vat: vat, 
-            price_after_vat: price_after_vat, 
+            price_after_vat: priceAfterVat, 
             can_enable_button: priceBeforeVat < 0 && numberOfNights < 0, 
-            price_per_person: pricePerPerson
+            price_per_person: pricePerPerson,
+            numberOfNights: numberOfNights
         }
-        setCurrentRoomAttribute({attributeToChange: 'financial_info', value: newFinancialObject})
-    }, [currentRoom])
+        setCurrentRoom((prevState) => {
+            return {...prevState, financial_info: newFinancialObject, occupancy_per_night: occupancy}
+        })
+    }, [getCurrentRoomAttribute, getOccupancy, getNumberOfNights])
 
     const getFinancialInfo = useCallback(() => {
         return currentRoom.financial_info
     }, [currentRoom])
-    
+
     const isButtonDisabled = useCallback(() =>{
-        const priceBeforeVat = getCurrentRoomAttribute('price_before_vat')
-        const numberOfNights = getCurrentRoomAttribute('number_of_nights')
-        return priceBeforeVat < 0 && numberOfNights < 0
-    }, [currentRoom, handleFinancialChange, setCurrentRoomAttribute])
+        const numberOfNights = getNumberOfNights()
+        return !numberOfNights;
+    }, [getNumberOfNights])
     
     return (
         <div className={isLastRoom ? "room-item-container last-room" : "room-item-container"}>
@@ -76,24 +84,23 @@ export function RoomItemContainer({getSpecificRoom, room, isLastRoom, roomId, op
             <div className="room-date-selector">
                 <DateSelector 
                 roomId = {roomId} 
-                setCurrentRoomAttribute = {setCurrentRoomAttribute} 
-                handleFinancialChange = {handleFinancialChange}
                 getCurrentRoomAttribute = {getCurrentRoomAttribute}
+                setNumberOfNights = {setNumberOfNights}
+                setFinancialInformation = {setFinancialInformation}
+                setCurrentRoomAttribute = {setCurrentRoomAttribute}
                 />
                 </div>
             <div className="room-occupancy-selector">
                 <OccupancySelector
-                handleFinancialChange = {(value) => handleFinancialChange({numberOfNights: getCurrentRoomAttribute('number_of_nights'), occupancyPerNight: value})} 
                 capacity = {room.capacity_per_room}
-                roomId = {roomId}
-                setCurrentRoomAttribute ={setCurrentRoomAttribute} 
-                getCurrentRoomAttribute = {getCurrentRoomAttribute}
+                setOccupancy = {setOccupancy}
+                setFinancialInformation = {setFinancialInformation}
                 />
             </div>
         </div>
         <div className="room-checkout-container">
             <BookButton getCurrentRoom = {getCurrentRoom} isButtonDisabled = {isButtonDisabled} openModal={openModal}/>
-            <TotalPrice getFinancialInfo={getFinancialInfo}/>
+            <TotalPrice getFinancialInfo={getFinancialInfo} isButtonDisabled = {isButtonDisabled}/>
         </div>
         <div className="room-info">
             <RoomType roomType={room.room_type}/>

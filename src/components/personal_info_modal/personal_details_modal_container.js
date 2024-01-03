@@ -7,7 +7,7 @@ import { EstimatedArrivalTimeSelector } from "./form_components/estimated_arriva
 import { SpecialRequestInput } from "./form_components/special_request";
 import { ConfirmBooking } from "./form_components/confirm_booking";
 
-export function PersonalDetailsModal({ closeModal, bookingInformation }) {
+export function PersonalDetailsModal({ closeModal, modalContext }) {
   const [personalDetails, setPersonalDetails] = useState({
     firstName: "",
     lastName: "",
@@ -24,6 +24,7 @@ export function PersonalDetailsModal({ closeModal, bookingInformation }) {
       [formComponent]: value,
     }));
   }, []);
+
     
   const isFormValid = Object.values(personalDetails).every((value) => value !== "");
 
@@ -54,7 +55,7 @@ export function PersonalDetailsModal({ closeModal, bookingInformation }) {
         <SpecialRequestInput onChange={(value) => handleFormChange("specialRequest", value)} />
       </div>
       <div className="modal-element" id="confirm-booking-container">
-        <ConfirmBooking isDisabled = {!isFormValid} confirmBookingInformation = {personalDetails}/>
+        <ConfirmBooking isDisabled = {!isFormValid} confirmBookingInformation = {{...modalContext, personalDetails: personalDetails}} />
       </div>
     </div>
   );

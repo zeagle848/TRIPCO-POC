@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { usePopper } from 'react-popper';
 
-export function TotalPrice({getFinancialInfo}){
+export function TotalPrice({getFinancialInfo, isButtonDisabled}){
     const [referenceElement, setReferenceElement] = useState(null);
     const [popperElement, setPopperElement] = useState(null);
     const [arrowElement, setArrowElement] = useState(null);
@@ -19,15 +19,13 @@ export function TotalPrice({getFinancialInfo}){
     const handleMouseLeave = () => {
         setIsHovered(false);
     };
-    
-    const currentFinancialInfo = getFinancialInfo()
-    const [vat, setVat] = useState(currentFinancialInfo.vat);
-    const [priceAfterVat, setPriceAfterVat] = useState(currentFinancialInfo.price_after_vat);
-    
+    const financialInfo = useMemo(() => getFinancialInfo(), [getFinancialInfo]);    
 
+    const priceAfterVat = financialInfo.price_after_vat;
+    const vat = financialInfo.vat
     return(
         <div>
-            { priceAfterVat > 0 && 
+            { !isButtonDisabled() && 
             <div className='total-price-container'>Total: 
                 <h4 
                 className="total-price" 
@@ -47,7 +45,7 @@ export function TotalPrice({getFinancialInfo}){
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             >
-                <span className='tooltip-text'>{`R${vat}`}</span>
+                <span className='tooltip-text'>{`VAT: R${vat}`}</span>
                 <div ref={setArrowElement} style={styles.arrow} className='arrow'/>
             </div>
             )}

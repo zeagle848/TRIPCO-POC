@@ -2,7 +2,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { styled } from '@mui/system';
 import { convertIntToWord } from '../../../../../utils/utils';
-import { useState, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 
 const StyledSelect = styled(Select)({
     width: 'index+130px',
@@ -12,11 +12,20 @@ const StyledSelect = styled(Select)({
 
 export function OccupancySelector({
     capacity, 
-    setCurrentRoomAttribute, 
-    handleFinancialChange
+    setOccupancy,
+    setFinancialInformation
 }){
     const [selectedOccupancy, setSelectedOccupancy] = useState(1)
 
+    const onChangeHandlerOccupancy = (newValue) => {
+        setSelectedOccupancy(newValue)
+        setOccupancy(newValue)
+    };
+
+    useEffect(() => {
+        setFinancialInformation();
+    }, [setOccupancy, setFinancialInformation]);
+    
     return(
         <div className='occupancy-container'>
             <h5>Occupancy:</h5>
@@ -26,9 +35,7 @@ export function OccupancySelector({
             value={selectedOccupancy}
             displayEmpty
             onChange={(event) => {
-                setCurrentRoomAttribute({attributeToChange: 'occupancy_per_night', value: event.target.value})
-                setSelectedOccupancy(event.target.value)
-                handleFinancialChange(event.target.value)
+                onChangeHandlerOccupancy(event.target.value)
             }}
             >
             {Array(capacity).fill().map((_, index) => (

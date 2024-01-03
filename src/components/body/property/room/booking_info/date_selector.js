@@ -9,7 +9,11 @@ const StyledDatePicker = styled(DatePicker)({
     right: '1.65rem'
 });
 
-export function DateSelector({handleFinancialChange, setCurrentRoomAttribute, getCurrentRoomAttribute}){
+export function DateSelector({ 
+    setCurrentRoomAttribute, 
+    getCurrentRoomAttribute, 
+    setNumberOfNights, 
+    setFinancialInformation}){
     const [startDate, setStartDate] = useState(dayjs());
     const [endDate, setEndDate] = useState(null);
 
@@ -22,17 +26,23 @@ export function DateSelector({handleFinancialChange, setCurrentRoomAttribute, ge
         setEndDate(newValue);
         setCurrentRoomAttribute({attributeToChange: 'end_date', value: newValue})
     };
-
+    
     const handleDateChange = useCallback((startDate, endDate) => {
         if (endDate && startDate) {
-            const endDateDateFormatted = dayjs(endDate).startOf('day');
+            const endDateDateFormatted = dayjs(endDate).startOf('day'); 
             const startDateFormatted = dayjs(startDate).startOf('day');
             const diffInDays = endDateDateFormatted.diff(startDateFormatted, 'day');
-            setCurrentRoomAttribute({attributeToChange: 'number_of_nights', value: diffInDays})
-            handleFinancialChange({numberOfNights: diffInDays, occupancyPerNight: getCurrentRoomAttribute('occupancy_per_night')})
+            setNumberOfNights(diffInDays);
         }
-    }, [startDate, endDate, setCurrentRoomAttribute, handleFinancialChange])
+    }, [setCurrentRoomAttribute])
+    
+    useEffect(() => {
+        handleDateChange(getCurrentRoomAttribute('start_date'), getCurrentRoomAttribute('end_date'))
+    }, [startDate, endDate])
 
+    useEffect(() => {
+        setFinancialInformation();
+    }, [setNumberOfNights, setFinancialInformation]);
   
     return(
         <div className='date-selector-container'>
@@ -45,7 +55,6 @@ export function DateSelector({handleFinancialChange, setCurrentRoomAttribute, ge
                 value={startDate} 
                 onChange = {(value)=>{
                     onChangeHandlerStartSelector(value)
-                    handleDateChange(getCurrentRoomAttribute('start_date'), getCurrentRoomAttribute('end_date'))
                 }
                 } 
                 maxDate={endDate || undefined}/>
@@ -59,7 +68,6 @@ export function DateSelector({handleFinancialChange, setCurrentRoomAttribute, ge
                 minDate={startDate !== endDate ? startDate : ''} 
                 onChange= {(value) =>{
                     onChangeHandlerEndSelector(value)
-                    handleDateChange(getCurrentRoomAttribute('start_date'), getCurrentRoomAttribute('end_date'))
                 }
                 }/>
             </div>

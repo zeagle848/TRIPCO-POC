@@ -10,13 +10,67 @@ export function App() {
   const [isModalOpen, setModalOpen] = useState(false);
   
   const [modalContext, setModalContext] = useState({})
+  
+  const allRooms = [
+    {
+      room_id: 1,
+      number_of_rooms: 2,
+      capacity_per_room: 2,
+      start_date: dayjs(),
+      end_date: "",
+      price_per_person_per_night: 1000,
+      occupancy_per_night: 1,
+      financial_info : {
+        price_before_vat: null,
+        vat_total: null,
+        price_after_vat: null,
+        can_enable_button: false,
+        number_of_nights: null
+      }
+    },
+    {
+    room_id: 2,
+    number_of_rooms: 3,
+    capacity_per_room: 2,
+    start_date: dayjs(),
+    end_date: "",
+    price_per_person_per_night: 1500,
+    occupancy_per_night: 1,
+    financial_info : {
+      price_before_vat: null,
+      vat_total: null,
+      price_after_vat: null,
+      can_enable_button: false,
+      number_of_nights: null
+    },
+  },
+  {
+    room_id: 3,
+    number_of_rooms: 1,
+    capacity_per_room: 4,
+    start_date: dayjs(),
+    end_date: "",
+    price_per_person_per_night: 2000,
+    occupancy_per_night: 1,
+    financial_info : {
+      price_before_vat: null,
+      vat_total: null,
+      price_after_vat: null,
+      can_enable_button: false,
+      number_of_nights: null
+    },
+  }]
 
+  const getSpecificRoom = (roomId) => {
+    return allRooms.find(room => room.room_id === roomId) || undefined
+  };
+  
   const openModal = useCallback((currentRoom) => {
     setModalContext(currentRoom);
     setModalOpen(true);
     document.body.style.overflow = 'hidden';
   }, [])
-    
+  
   const closeModal = () => {
     setModalOpen(false);
     document.body.style.overflow = 'auto';
@@ -35,63 +89,7 @@ export function App() {
     };
   }, [isModalOpen]);
   
-  const [allRooms, setAllRooms] = useState([
-    {
-      room_id: 1,
-      number_of_rooms: 2,
-      capacity_per_room: 2,
-      start_date: dayjs(),
-      end_date: "",
-      price_per_person_per_night: 1000,
-      occupancy_per_night: null,
-      price_inc_vat: "",
-      price_excl_vat: "",
-      financial_info : {
-        price_before_vat: null,
-        vat_total: null,
-        price_after_vat: null,
-        can_enable_button: false,
-        number_of_nights: null
-      }
-    },
-    {
-    room_id: 2,
-    number_of_rooms: 3,
-    capacity_per_room: 2,
-    start_date: dayjs(),
-    end_date: "",
-    price_per_person_per_night: 1500,
-    occupancy_per_night: null,
-    price_inc_vat: "",
-    price_excl_vat: "",
-    financial_info : {
-      price_before_vat: null,
-      vat_total: null,
-      price_after_vat: null,
-      can_enable_button: false,
-      number_of_nights: null
-    },
-  },
-  {
-    room_id: 3,
-    number_of_rooms: 1,
-    capacity_per_room: 4,
-    start_date: dayjs(),
-    end_date: "",
-    price_per_person_per_night: 2000,
-    occupancy_per_night: null,
-    financial_info : {
-      price_before_vat: null,
-      vat_total: null,
-      price_after_vat: null,
-      can_enable_button: false,
-      number_of_nights: null
-    },
-  }])
   
-  const getSpecificRoom = useCallback((roomId) => {
-    return allRooms.find(room => room.room_id === roomId) || undefined
-  }, [allRooms])
   
   const getModalContext = useCallback(() => {
     return modalContext;

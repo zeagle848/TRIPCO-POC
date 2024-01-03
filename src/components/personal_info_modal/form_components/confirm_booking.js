@@ -22,6 +22,7 @@ const theme = createTheme({
 
 export function ConfirmBooking({isDisabled, confirmBookingInformation}) {
     const handleConfirmClick = () => {
+        console.log(confirmBookingInformation)
     }
     return(
         <div>
