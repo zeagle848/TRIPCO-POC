@@ -46,6 +46,14 @@ Beginning with the design phase of development allowed me to dive right into act
 
 From there I began building out my components. This bottom-up approach allowed me to plug in my components wherever needed, and drastically decreased development time in my opinion. The abstraction of components was necessary due to the fact that I would be having to dynamically build each 'room' component based off the data provided. 
 
+All components were built in isolation of each other, that being there was no logic that created any side-effects. In fact outside of simple validation there was no logic at all.
+
+### Final build
+
+The final phase included putting all the components together, adding logic, and then tightening up the style of the application. The bulk of the logic was dedicateded to updating the booking price based off the occupancy and nights selected. 
+
+The design, as mentioned previously, changed slightly, but remained fundamentally consistent.
+
 ## Technical Assignment Brief
 
 Task: Create a single-page booking form to make a reservation at a property on an online travel agency.
