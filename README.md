@@ -8,6 +8,8 @@
 - [Dummy Data](#dummy-data)
 ## Getting Started
 
+You can either clone this repository on your local machine or simply download the code.
+
 Before we can start the live server, we must first make sure that Node.js is installed. Check by opening your console and running `node -v`. If you can't see a version number, you must install Node.js. 
 
 To view the app locally, you can begin by installing the dependencies...
