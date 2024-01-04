@@ -1,4 +1,4 @@
-# Technical Assesment for TRIPCO
+# Technical Assessment for TRIPCO
 
 ## Table of Contents
 
@@ -8,9 +8,9 @@
 - [Dummy Data](#dummy-data)
 ## Getting Started
 
-Before we can start the live server we must first make sure that Node.js is installed. Check by opening your console and running `node -v`. If you can't see a version number you must install Node.js. 
+Before we can start the live server, we must first make sure that Node.js is installed. Check by opening your console and running `node -v`. If you can't see a version number, you must install Node.js. 
 
-To view the app locally you can begin by installing the dependencies...
+To view the app locally, you can begin by installing the dependencies...
 
 `npm install`
 
@@ -22,7 +22,7 @@ The application should be live on `http://localhost:8080/` if it doesn't open au
 
 ## Development Notes
 
-This was a technical assessment provided as a part of the interview process with TRIPCO. Development time was approximatelty 4-5 days of work. 
+This was a technical assessment provided as part of the interview process with TRIPCO. The development time was approximately 4-5 days of work. 
 
 ### Design
 
@@ -36,21 +36,21 @@ The first part of my development process was the design phase. I used Figma and 
 
 The look and feel of the original design is different to the final product, but the fundamental structure is the same. 
 
-I followedd two primary 'rules' during the development of the design: 
+I followed two primary 'rules' during the development of the design: 
 1. It must contain all the necessary information requested in the technical assignment brief.
-2. It cannot be based off the current designs TRIPCO uses in LekkerSlaap, TravelGround or Viya. I took this further and didn't look at any accomodation booking application at all. The only exception I allowed myself was basing the *content* of the personal details modal off that of AirBnB, *not* the design.
+2. It cannot be based on the current designs TRIPCO uses in LekkerSlaap, TravelGround or Viya. I took this further and didn't look at any accomodation booking application at all. The only exception I allowed myself was basing the *content* of the personal details modal on that of AirBnB, *not* the design.
 
 ### Building Component Library
 
 Beginning with the design phase of development allowed me to dive right into actual application development. This began with fleshing out the file and folder structure of my application. This followed the flow of the design document. 
 
-From there I began building out my components. This bottom-up approach allowed me to plug in my components wherever needed, and drastically decreased development time in my opinion. The abstraction of components was necessary due to the fact that I would be having to dynamically build each 'room' component based off the data provided. 
+From there, I began building out my components. This bottom-up approach allowed me to plug in my components wherever needed and drastically decreased development time, in my opinion. The abstraction of components was necessary due to the fact that I would be having to dynamically build each 'room' component based on the data provided. 
 
-All components were built in isolation of each other, that being there was no logic that created any side-effects. In fact outside of simple validation there was no logic at all.
+All components were built in isolation from each other; that is, there was no logic that created any side effects. In fact, outside of simple validation, there was no logic at all.
 
 ### Final build
 
-The final phase included putting all the components together, adding logic, and then tightening up the style of the application. The bulk of the logic was dedicateded to updating the booking price based off the occupancy and nights selected. 
+The final phase included putting all the components together, adding logic, and then tightening up the style of the application. The bulk of the logic was dedicated to updating the booking price based on the occupancy and nights selected. 
 
 The design, as mentioned previously, changed slightly, but remained fundamentally consistent.
 
