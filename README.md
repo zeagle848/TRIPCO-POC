@@ -56,6 +56,12 @@ The final phase included putting all the components together, adding logic, and 
 
 The design, as mentioned previously, changed slightly, but remained fundamentally consistent.
 
+### Tech stack
+- Webpack
+- React
+- Vanilla CSS
+- MaterialUI
+- Popper.js
 ## Technical Assignment Brief
 
 Task: Create a single-page booking form to make a reservation at a property on an online travel agency.
